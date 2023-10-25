@@ -52,6 +52,9 @@ namespace FullStackAuth_WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<double>("OriginalPrice")
+                        .HasColumnType("double");
+
                     b.Property<double>("PurchaseAmount")
                         .HasColumnType("double");
 
@@ -60,6 +63,9 @@ namespace FullStackAuth_WebAPI.Migrations
 
                     b.Property<string>("PurchasedGameTitle")
                         .HasColumnType("longtext");
+
+                    b.Property<double>("Savings")
+                        .HasColumnType("double");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
@@ -141,23 +147,32 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListed", b =>
+            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListedGame", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CheapestCurrentDealId")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GameName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("gameId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WishListeds");
+                    b.ToTable("WishListedGames");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -188,13 +203,13 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2ad1bea4-6cb9-4f93-a00e-6da1ff5ee7a9",
+                            Id = "c095fdf4-92cf-477c-8627-61e5f7787b05",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "8668dc8d-0195-4a64-b531-ccb6a4fdc4b8",
+                            Id = "22f4a3bf-2031-4ce0-829c-1ad8a12dd005",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -320,7 +335,7 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListed", b =>
+            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListedGame", b =>
                 {
                     b.HasOne("FullStackAuth_WebAPI.Models.User", "User")
                         .WithMany()

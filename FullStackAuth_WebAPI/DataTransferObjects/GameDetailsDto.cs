@@ -5,6 +5,6 @@
         public int GameId { get; set; }
         public string GameName { get; set; }
         public  string Thumbnail { get; set;}
-        public int CheapestCurrentDeal { get; set; }
+        public string CheapestCurrentDeal { get; set; }
     }
 }

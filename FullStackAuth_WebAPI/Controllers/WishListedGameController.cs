@@ -88,6 +88,7 @@ namespace FullStackAuth_WebAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<WishListedController>/5

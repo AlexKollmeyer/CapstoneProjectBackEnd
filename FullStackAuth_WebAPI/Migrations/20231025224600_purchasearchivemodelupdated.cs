@@ -7,7 +7,7 @@
 namespace FullStackAuth_WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class migration3 : Migration
+    public partial class purchasearchivemodelupdated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,20 +15,34 @@ namespace FullStackAuth_WebAPI.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "39812ae4-18ee-4687-90d9-0215fe4024da");
+                keyValue: "2a354e25-f58e-4363-86fe-7f1390f6e442");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "b470f4ff-1cf4-49b0-8416-2e151a91883f");
+                keyValue: "2fc89045-6652-4709-b3a0-c8aa97e62dc9");
+
+            migrationBuilder.AddColumn<double>(
+                name: "OriginalPrice",
+                table: "PurchaseArchives",
+                type: "double",
+                nullable: false,
+                defaultValue: 0.0);
+
+            migrationBuilder.AddColumn<double>(
+                name: "Savings",
+                table: "PurchaseArchives",
+                type: "double",
+                nullable: false,
+                defaultValue: 0.0);
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2ad1bea4-6cb9-4f93-a00e-6da1ff5ee7a9", null, "User", "USER" },
-                    { "8668dc8d-0195-4a64-b531-ccb6a4fdc4b8", null, "Admin", "ADMIN" }
+                    { "22f4a3bf-2031-4ce0-829c-1ad8a12dd005", null, "Admin", "ADMIN" },
+                    { "c095fdf4-92cf-477c-8627-61e5f7787b05", null, "User", "USER" }
                 });
         }
 
@@ -38,20 +52,28 @@ namespace FullStackAuth_WebAPI.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "2ad1bea4-6cb9-4f93-a00e-6da1ff5ee7a9");
+                keyValue: "22f4a3bf-2031-4ce0-829c-1ad8a12dd005");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "8668dc8d-0195-4a64-b531-ccb6a4fdc4b8");
+                keyValue: "c095fdf4-92cf-477c-8627-61e5f7787b05");
+
+            migrationBuilder.DropColumn(
+                name: "OriginalPrice",
+                table: "PurchaseArchives");
+
+            migrationBuilder.DropColumn(
+                name: "Savings",
+                table: "PurchaseArchives");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "39812ae4-18ee-4687-90d9-0215fe4024da", null, "User", "USER" },
-                    { "b470f4ff-1cf4-49b0-8416-2e151a91883f", null, "Admin", "ADMIN" }
+                    { "2a354e25-f58e-4363-86fe-7f1390f6e442", null, "User", "USER" },
+                    { "2fc89045-6652-4709-b3a0-c8aa97e62dc9", null, "Admin", "ADMIN" }
                 });
         }
     }

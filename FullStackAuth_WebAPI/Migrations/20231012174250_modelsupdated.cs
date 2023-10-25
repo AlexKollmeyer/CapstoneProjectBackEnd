@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace FullStackAuth_WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class migration2 : Migration
+    public partial class modelsupdated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,19 +47,22 @@ namespace FullStackAuth_WebAPI.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "WishListeds",
+                name: "WishListedGames",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    gameId = table.Column<int>(type: "int", nullable: false),
+                    GameId = table.Column<int>(type: "int", nullable: false),
+                    GameName = table.Column<string>(type: "longtext", nullable: true),
+                    Thumbnail = table.Column<string>(type: "longtext", nullable: true),
+                    CheapestCurrentDealId = table.Column<string>(type: "longtext", nullable: true),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WishListeds", x => x.Id);
+                    table.PrimaryKey("PK_WishListedGames", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WishListeds_AspNetUsers_UserId",
+                        name: "FK_WishListedGames_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -71,8 +74,8 @@ namespace FullStackAuth_WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "39812ae4-18ee-4687-90d9-0215fe4024da", null, "User", "USER" },
-                    { "b470f4ff-1cf4-49b0-8416-2e151a91883f", null, "Admin", "ADMIN" }
+                    { "2a354e25-f58e-4363-86fe-7f1390f6e442", null, "User", "USER" },
+                    { "2fc89045-6652-4709-b3a0-c8aa97e62dc9", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -81,8 +84,8 @@ namespace FullStackAuth_WebAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WishListeds_UserId",
-                table: "WishListeds",
+                name: "IX_WishListedGames_UserId",
+                table: "WishListedGames",
                 column: "UserId");
         }
 
@@ -93,17 +96,17 @@ namespace FullStackAuth_WebAPI.Migrations
                 name: "PurchaseArchives");
 
             migrationBuilder.DropTable(
-                name: "WishListeds");
+                name: "WishListedGames");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "39812ae4-18ee-4687-90d9-0215fe4024da");
+                keyValue: "2a354e25-f58e-4363-86fe-7f1390f6e442");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "b470f4ff-1cf4-49b0-8416-2e151a91883f");
+                keyValue: "2fc89045-6652-4709-b3a0-c8aa97e62dc9");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",

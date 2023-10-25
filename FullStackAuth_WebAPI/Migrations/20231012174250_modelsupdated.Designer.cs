@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FullStackAuth_WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231005152017_migration2")]
-    partial class migration2
+    [Migration("20231012174250_modelsupdated")]
+    partial class modelsupdated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,23 +144,32 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListed", b =>
+            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListedGame", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CheapestCurrentDealId")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GameName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("gameId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WishListeds");
+                    b.ToTable("WishListedGames");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -191,13 +200,13 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "39812ae4-18ee-4687-90d9-0215fe4024da",
+                            Id = "2a354e25-f58e-4363-86fe-7f1390f6e442",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "b470f4ff-1cf4-49b0-8416-2e151a91883f",
+                            Id = "2fc89045-6652-4709-b3a0-c8aa97e62dc9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -323,7 +332,7 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListed", b =>
+            modelBuilder.Entity("FullStackAuth_WebAPI.Models.WishListedGame", b =>
                 {
                     b.HasOne("FullStackAuth_WebAPI.Models.User", "User")
                         .WithMany()

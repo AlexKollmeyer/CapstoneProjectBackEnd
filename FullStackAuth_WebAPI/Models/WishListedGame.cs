@@ -12,7 +12,7 @@ namespace FullStackAuth_WebAPI.Models
         public int GameId { get; set; }
         public string GameName { get; set; }
         public string Thumbnail { get; set; }
-        public int CheapestCurrentDealId { get; set; }
+        public string CheapestCurrentDealId { get; set; }
 
         [ForeignKey("User")]
         public string UserId { get; set; }

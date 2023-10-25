@@ -27,7 +27,7 @@ namespace FullStackAuth_WebAPI.Controllers
         }
 
         // GET api/<PurchaseArchiveController>/5
-        [HttpGet("mypurcahsearchive"), Authorize]
+        [HttpGet("mypurchasearchive"), Authorize]
         public IActionResult Get(string id)
         {
             try
@@ -35,10 +35,10 @@ namespace FullStackAuth_WebAPI.Controllers
                 // Retrieve the authenticated user's ID from the JWT token
                 string userId = User.FindFirstValue("id");
 
-                // Retrieve all cars that belong to the authenticated user, including the owner object
+ 
                 var purchaseArchives = _context.PurchaseArchives.Where(c => c.UserId.Equals(userId));
 
-                // Return the list of cars as a 200 OK response
+
                 return StatusCode(200, purchaseArchives);
             }
             catch (Exception ex)
