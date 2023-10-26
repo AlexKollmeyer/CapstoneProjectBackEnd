@@ -86,15 +86,28 @@ namespace FullStackAuth_WebAPI.Controllers
 
         // PUT api/<WishListedController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] WishListedGame wishListedGame)
         {
-
+            var wishListedGameToUpdate = _context.WishListedGames.Find(id);
+            if (wishListedGameToUpdate == null)
+            {
+                return NotFound();
+            }
+            wishListedGameToUpdate.CheapestCurrentDealId = wishListedGame.CheapestCurrentDealId;
+            _context.SaveChanges();
+            return Ok(wishListedGame);
         }
-
-        // DELETE api/<WishListedController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+            // DELETE api/<WishListedController>/5
+            [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
+            var wishListedGameToRemove = _context.WishListedGames.FirstOrDefault(m => m.Id == id);
+            if (wishListedGameToRemove == null)
+                return NotFound();
+            _context.WishListedGames.Remove(wishListedGameToRemove);
+            _context.SaveChanges();
+            return NoContent();
+
         }
     }
 }

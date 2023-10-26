@@ -29,7 +29,7 @@ namespace FullStackAuth_WebAPI.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<GameDetailsDto>/5
+        // GET api/<WishListDto>/5
         [HttpGet("{gameId}"), Authorize]
         public IActionResult Get(int gameId)
         {
