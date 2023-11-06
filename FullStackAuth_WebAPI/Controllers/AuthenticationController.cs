@@ -27,7 +27,6 @@ namespace FullStackAuth_WebAPI.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
-
             var user = _mapper.Map<User>(userForRegistration);
 
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
@@ -39,7 +38,17 @@ namespace FullStackAuth_WebAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            await _userManager.AddToRoleAsync(user, "USER");
+
+            // Default role
+            var role = "USER";
+
+            // Check if the registered user should be an admin based on the email domain
+            if (user.Email.EndsWith("@Admin.com"))
+            {
+                role = "ADMIN";
+            }
+
+            await _userManager.AddToRoleAsync(user, role);
 
             UserForDisplayDto createdUser = new UserForDisplayDto
             {
@@ -50,6 +59,7 @@ namespace FullStackAuth_WebAPI.Controllers
             };
             return StatusCode(201, createdUser);
         }
+
 
         [HttpPost("login")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
