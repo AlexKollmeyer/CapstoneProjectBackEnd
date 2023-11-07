@@ -60,7 +60,6 @@ namespace FullStackAuth_WebAPI.Controllers
             return StatusCode(201, createdUser);
         }
 
-
         [HttpPost("login")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
@@ -70,7 +69,29 @@ namespace FullStackAuth_WebAPI.Controllers
                 return Unauthorized();
             }
 
-            return Ok(new { access = await _authManager.CreateToken() });
+            var loggedInUser = await _userManager.FindByNameAsync(user.UserName);
+
+            if (loggedInUser != null)
+            {
+                // Check the user's role
+                var userRoles = await _userManager.GetRolesAsync(loggedInUser);
+
+                // Default role
+                var role = "USER";
+
+                // Check if the user has the "Admin" role
+                if (userRoles.Contains("Admin"))
+                {
+                    role = "Admin";
+                }
+
+                // Create token for the user
+                var token = await _authManager.CreateToken();
+
+                return Ok(new { access = token, role });
+            }
+
+            return Unauthorized();
         }
     }
 }
