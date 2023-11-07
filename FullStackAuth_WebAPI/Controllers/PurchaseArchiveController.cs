@@ -20,10 +20,11 @@ namespace FullStackAuth_WebAPI.Controllers
             _context = context;
         }
         // GET: api/<PurchaseArchiveController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("allcustomerpurchases"), Authorize(Policy ="AdminOnly")]
+        public IActionResult GetAllPurchases(string id)
         {
-            return new string[] { "value1", "value2" };
+            var purchases = _context.PurchaseArchives.ToList();
+            return StatusCode(200, purchases);
         }
 
         // GET api/<PurchaseArchiveController>/5
