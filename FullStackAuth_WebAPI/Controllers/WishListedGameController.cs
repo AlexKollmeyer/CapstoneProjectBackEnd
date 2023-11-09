@@ -19,10 +19,20 @@ namespace FullStackAuth_WebAPI.Controllers
             _context = context;
         }
         // GET: api/<WishListedController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("customerwishlist/{id}"), Authorize(Policy = "AdminOnly")]
+        public IActionResult GetCustomerWishList(string id)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var wishListeds = _context.WishListedGames.Where(c => c.UserId.Equals(id));
+
+                return StatusCode(200, wishListeds);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+            
         }
 
         // GET api/<WishListedController>/5
@@ -31,13 +41,8 @@ namespace FullStackAuth_WebAPI.Controllers
         {
             try
             {
-                // Retrieve the authenticated user's ID from the JWT token
                 string userId = User.FindFirstValue("id");
-
-                // Retrieve all cars that belong to the authenticated user, including the owner object
                 var wishListeds = _context.WishListedGames.Where(c => c.UserId.Equals(userId));
-
-                // Return the list of cars as a 200 OK response
                 return StatusCode(200, wishListeds);
             }
             catch (Exception ex)
