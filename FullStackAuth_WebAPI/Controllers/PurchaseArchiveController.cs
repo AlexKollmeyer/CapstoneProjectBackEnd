@@ -26,7 +26,21 @@ namespace FullStackAuth_WebAPI.Controllers
             var purchases = _context.PurchaseArchives.ToList();
             return StatusCode(200, purchases);
         }
+        [HttpGet("customerpurchasearchive/{id}"), Authorize(Policy = "AdminOnly")]
+        public IActionResult GetCustomerPurchaseArchive(string id)
+        {
+            try
+            {
+                var purchaseArchives = _context.PurchaseArchives.Where(c => c.UserId.Equals(id));
 
+                return StatusCode(200, purchaseArchives);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
         // GET api/<PurchaseArchiveController>/5
         [HttpGet("mypurchasearchive"), Authorize]
         public IActionResult Get(string id)
