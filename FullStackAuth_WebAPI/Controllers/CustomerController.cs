@@ -1,4 +1,5 @@
 ﻿using FullStackAuth_WebAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,10 +16,18 @@ namespace FullStackAuth_WebAPI.Controllers
             _context = context;
         }
         // GET: api/<CustomerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet, Authorize(Policy = "AdminOnly")]
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var customerIds = _context.UserRoles
+             .Where(ur => ur.RoleId == "c095fdf4-92cf-477c-8627-61e5f7787b05")
+             .Select(ur => ur.UserId)
+             .ToList();
+
+            var customers = _context.Users
+                .Where(u => customerIds.Contains(u.Id))
+                .ToList();
+            return StatusCode(200, customers);
         }
 
         // GET api/<CustomerController>/5
