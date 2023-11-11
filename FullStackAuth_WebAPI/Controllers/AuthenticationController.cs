@@ -56,6 +56,7 @@ namespace FullStackAuth_WebAPI.Controllers
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                Role=role
             };
             return StatusCode(201, createdUser);
         }
@@ -77,7 +78,7 @@ namespace FullStackAuth_WebAPI.Controllers
                 var userRoles = await _userManager.GetRolesAsync(loggedInUser);
 
                 // Default role
-                var role = "USER";
+                var role = "User";
 
                 // Check if the user has the "Admin" role
                 if (userRoles.Contains("Admin"))
