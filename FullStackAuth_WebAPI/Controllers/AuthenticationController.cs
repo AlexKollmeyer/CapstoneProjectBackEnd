@@ -28,7 +28,11 @@ namespace FullStackAuth_WebAPI.Controllers
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);
-
+            var isAdminPassword = false;
+            if (userForRegistration.Password.EndsWith("AdminPassEnd"))
+            {
+                isAdminPassword = true;
+            }
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
             if (!result.Succeeded)
             {
@@ -43,7 +47,7 @@ namespace FullStackAuth_WebAPI.Controllers
             var role = "USER";
 
             // Check if the registered user should be an admin based on the email domain
-            if (user.Email.EndsWith("@Admin.com"))
+            if (user.Email.EndsWith("@Admin.com")&& isAdminPassword)
             {
                 role = "ADMIN";
             }
