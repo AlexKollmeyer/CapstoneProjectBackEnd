@@ -108,8 +108,15 @@ namespace FullStackAuth_WebAPI.Controllers
 
         // DELETE api/<PurchaseArchiveController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var purchaseArchiveToRemove = _context.PurchaseArchives.FirstOrDefault(m => m.Id == id);
+            if (purchaseArchiveToRemove == null)
+                return NotFound();
+            _context.PurchaseArchives.Remove(purchaseArchiveToRemove);
+            _context.SaveChanges();
+            return NoContent();
+
         }
     }
 }
