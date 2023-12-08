@@ -55,7 +55,6 @@ namespace FullStackAuth_WebAPI.Migrations
                     GameId = table.Column<int>(type: "int", nullable: false),
                     GameName = table.Column<string>(type: "longtext", nullable: true),
                     Thumbnail = table.Column<string>(type: "longtext", nullable: true),
-                    CheapestCurrentDealId = table.Column<string>(type: "longtext", nullable: true),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>

@@ -28,6 +28,8 @@ namespace FullStackAuth_WebAPI.Controllers
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);
+            
+            
             var isAdminPassword = false;
             if (userForRegistration.Password.EndsWith("AdminPassEnd"))
             {

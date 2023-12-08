@@ -49,8 +49,7 @@ namespace FullStackAuth_WebAPI.Controllers
                     {
                         GameId = w.GameId,
                         GameName = w.GameName,
-                        Thumbnail = w.Thumbnail,
-                        CheapestCurrentDeal = w.CheapestCurrentDealId
+                        Thumbnail = w.Thumbnail
                     }).ToList()
                 };
                 return StatusCode(200, Wishlist);

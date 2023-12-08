@@ -98,7 +98,6 @@ namespace FullStackAuth_WebAPI.Controllers
             {
                 return NotFound();
             }
-            wishListedGameToUpdate.CheapestCurrentDealId = wishListedGame.CheapestCurrentDealId;
             _context.SaveChanges();
             return Ok(wishListedGame);
         }
