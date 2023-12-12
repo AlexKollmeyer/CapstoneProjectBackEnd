@@ -7,37 +7,10 @@
 namespace FullStackAuth_WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedWishListedGameModel : Migration
+    public partial class WishListedGameModelUpdated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "22f4a3bf-2031-4ce0-829c-1ad8a12dd005");
-
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "c095fdf4-92cf-477c-8627-61e5f7787b05");
-
-            migrationBuilder.DropColumn(
-                name: "CheapestCurrentDealId",
-                table: "WishListedGames");
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "67cd33ea-151e-46b4-89eb-1570601287c7", null, "Admin", "ADMIN" },
-                    { "b4fb96e7-951c-461d-87a4-e58abc257b56", null, "User", "USER" }
-                });
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
@@ -49,19 +22,36 @@ namespace FullStackAuth_WebAPI.Migrations
                 keyColumn: "Id",
                 keyValue: "b4fb96e7-951c-461d-87a4-e58abc257b56");
 
-            migrationBuilder.AddColumn<string>(
-                name: "CheapestCurrentDealId",
-                table: "WishListedGames",
-                type: "longtext",
-                nullable: true);
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "a353fcd1-0983-4191-a95b-6364a54ee6bd", null, "Admin", "ADMIN" },
+                    { "e1883383-51f9-45a8-86ba-85ec80627c0d", null, "User", "USER" }
+                });
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "a353fcd1-0983-4191-a95b-6364a54ee6bd");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "e1883383-51f9-45a8-86ba-85ec80627c0d");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "22f4a3bf-2031-4ce0-829c-1ad8a12dd005", null, "Admin", "ADMIN" },
-                    { "c095fdf4-92cf-477c-8627-61e5f7787b05", null, "User", "USER" }
+                    { "67cd33ea-151e-46b4-89eb-1570601287c7", null, "Admin", "ADMIN" },
+                    { "b4fb96e7-951c-461d-87a4-e58abc257b56", null, "User", "USER" }
                 });
         }
     }

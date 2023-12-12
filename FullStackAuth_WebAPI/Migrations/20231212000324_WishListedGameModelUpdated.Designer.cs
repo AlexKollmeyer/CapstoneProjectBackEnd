@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FullStackAuth_WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231208152702_UpdatedWishListedGameModel")]
-    partial class UpdatedWishListedGameModel
+    [Migration("20231212000324_WishListedGameModelUpdated")]
+    partial class WishListedGameModelUpdated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -203,13 +203,13 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4fb96e7-951c-461d-87a4-e58abc257b56",
+                            Id = "e1883383-51f9-45a8-86ba-85ec80627c0d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "67cd33ea-151e-46b4-89eb-1570601287c7",
+                            Id = "a353fcd1-0983-4191-a95b-6364a54ee6bd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
